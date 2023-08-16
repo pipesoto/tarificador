@@ -1,4 +1,8 @@
+<?php 
 
+	$conexion=mysqli_connect('34.176.13.110','admin','admin1248!','bxp');
+
+ ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -18,12 +22,15 @@
           <a class="navbar-brand" href="#">
             <img src="./img/ZED4.png" alt="logo">
           </a>
-          <!-- <div class="botones">
-            <a id="open" class="btn btn-warning" href="#" role="button">Solicitar Créditos</a>
-          </div> -->
-          <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+             <div class="saldo">
+              <input type="text" class="form-control" placeholder="Saldo: $ 340.000">
+             </div>
+            <div class="botonSolictar">
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             Solicitar Créditos
-          </button>
+            </button>
+            </div>
+            
         </div>
         
       </nav>
@@ -36,9 +43,16 @@
         </div>
         
 <div class="boxes">
+  <?php 
+		$sql="select total from tarificador  where fecha_llamadas > CURRENT_DATE order by fecha_llamadas desc limit 1";
+		$result=mysqli_query($conexion,$sql);
+
+		while($mostrar=mysqli_fetch_array($result)){
+		 ?>
+	
 <div class="box box1">
     <span class="text">Depredador</span>
-    <span class="number">$ 50.000</span>
+    <span class="number">$ <?php echo $mostrar['total'] ?></span>
 </div>
 <div class="box box2">
     <span class="text">Transferencia</span>
@@ -51,6 +65,9 @@
     <span class="number">$ 240.000</span>
 </div>
 </div>
+<?php 
+	}
+	 ?>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -63,14 +80,20 @@
       <div class="modal-body">
         <p>Para solicitar créditos debes seguir los siguientes pasos </p>
         <ol>
-          <li>Enviar formulario con solicitud de créditos</li>
-          <li>Hacer depósito a cuenta Zed</li>
-          <li>enviar correo electrónico</li>
+          <li>Realizar Transferencia a empresa Zed</li>
+          <ul>
+            <li><strong> Numero de Rutt:</strong> 77.327.308-1</li>
+            <li><strong> Numero de cuenta:</strong></li>
+            <li><strong>Correo electrónico:</strong></li>
+            <li><strong>Numero de cuenta:</strong></li>
+        </ul>
+          <li>Luego indicar en transferencia el asunto: Creditos + cantidad</li>
+          <li>Verificaremos depósito y activación de créditos.</li>
         </ol>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-warning"  role="link" onclick="window.location='./contacto.html'">Llenar Formulario</button>
+        <!-- <button type="button" class="btn btn-warning"  role="link" onclick="window.location='./contacto.html'">Llenar Formulario</button> -->
       </div>
     </div>
   </div>

@@ -103,3 +103,6 @@ color: var(--text-color);
 .boxes .box .box3{
     background-color: var(--box3-color);
 }
+.contacto{
+    padding-top: 40px;
+}
